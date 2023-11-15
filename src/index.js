@@ -30,7 +30,7 @@ let hash    = require('string-hash')
 
 // NOTE: Don't touch these! Instead build the project like:
 // QUESTION_ID=10 npm run build
-let choices = ["Being Lazy", "Wasting Money", "Being Dishonest", "Becoming a Teen Parent"];
+let choices = ["Faul sein", "Geld verschwenden", "Untreu sein", "Alleinerziehend"];
 let exclude = []
 let unique  = []
 console.debug(choices)
@@ -98,7 +98,7 @@ function advance() {
   let [ one, two ] = FOCUS
 
   // Display the new terms in the user interface
-  $terms.innerHTML = `Is <b>${ one }</b> related to <b>${ two }</b> ?`
+  $terms.innerHTML = `Steht <b>${ one }</b> in Verbindung mit <b>${ two }</b> ?`
 
   // Since we've moved on to the next question, Reset the timer
   TIMESTART = now()
@@ -109,7 +109,7 @@ function advance() {
 
 function finish() {
   classes.add($toolbar, 'mb-hidden')
-  $terms.innerHTML = `Task complete, please continue`
+  $terms.innerHTML = `Aufgabe abgeschlossen, bitte mit dem nächsten Abschnitt weitermachen`
   classes.remove($continue, 'mb-hidden')
 }
 
@@ -189,4 +189,4 @@ if ($field) {
 // Last: at this point everything should have loaded,
 // so lets change the user message from something like
 // 'Loading' to 'Start'
-$terms.innerHTML = 'Press start to begin'.bold()
+$terms.innerHTML = 'Drücken Sie Start, um zu beginnen.'.bold()

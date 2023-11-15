@@ -1,4 +1,6 @@
+
 require('node-env-file')('.env');
+
 
 console.log("Compiling JavaScript using question ID of %s", process.env.QUESTION_ID);
 console.log("Saving answers to %s", process.env.QUESTION_NAME);
@@ -8,7 +10,15 @@ var webpack = require('webpack');
 module.exports = {
     // Updated devtool format
     devtool: process.env.NODE_ENV === 'production' ? false : 'source-map',
-
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env.QUESTION_ID': JSON.stringify(process.env.QUESTION_ID),
+            'process.env.QUESTION_NAME': JSON.stringify(process.env.QUESTION_NAME),
+            'process.env.CHOICES_KEY': JSON.stringify(process.env.CHOICES_KEY)
+            // Add other environment variables here if needed
+        }),
+        // ... any other plugins ...
+    ],
     entry: {
         app: './src/index.js'
     },

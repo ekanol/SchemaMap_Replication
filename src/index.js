@@ -1,8 +1,27 @@
-let choices = require('../data/choices')
-let exclude = require('../data/exclude')
-let unique  = require('../data/unique')
-let pairs   = require('./pairs')
-let shuffle = require('./shuffle')
+// let choices = require('../data/choices.yml')
+// import choices from '../data/choices.yml';
+// let exclude = require('../data/exclude')
+// let unique  = require('../data/unique')
+// let pairs   = require('./pairs')
+// let shuffle = require('./shuffle')
+function pairs ([ a, ...tail]) {
+  return tail.length ? tail.map(b => [ a, b ]).concat(pairs(tail)) : []
+}
+function shuffle(array) {
+  var m = array.length, t, i;
+
+  while (m) {
+    i = Math.floor(Math.random() * m--);
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+  return array;
+}
+const testArray = [1, 2, 3, 4, 5];
+const shuffledArray = shuffle(testArray);
+console.log(shuffledArray);
+ console.log('FINE WITH SHUFFLE')
 let filter  = require('./filter')
 let events  = require('add-event-listener')
 let classes = require('dom-classes')
@@ -11,6 +30,11 @@ let hash    = require('string-hash')
 
 // NOTE: Don't touch these! Instead build the project like:
 // QUESTION_ID=10 npm run build
+let choices = ["Being Lazy", "Wasting Money", "Being Dishonest", "Becoming a Teen Parent"];
+let exclude = []
+let unique  = []
+console.debug(choices)
+console.debug('----------')
 const QUESTION_ID   = process.env.QUESTION_ID
 const QUESTION_NAME = process.env.QUESTION_NAME
 const CHOICES_KEY   = process.env.CHOICES_KEY
@@ -31,7 +55,17 @@ choices = choices.filter(function(choice) {
 })
 
 // Randomize items, both in the list of choices and the list of pairs
-let randomized = filter(shuffle(pairs(shuffle(choices))), unique)
+// PH let randomized = filter(shuffle(pairs(shuffle(choices))), unique)
+
+// Shuffle the choices first
+let shuffledChoices = shuffle(choices);
+
+// Generate pairs from the shuffled choices
+let pairedChoices = pairs(shuffledChoices);
+
+// Shuffle the pairs
+let randomized = shuffle(pairedChoices);
+
 let total      = randomized.length
 
 // DOM selection

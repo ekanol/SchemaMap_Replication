@@ -30,7 +30,7 @@ let hash    = require('string-hash')
 
 // NOTE: Don't touch these! Instead build the project like:
 // QUESTION_ID=10 npm run build
-let choices = ["Faul sein", "Geld verschwenden", "Untreu sein", "Alleinerziehend"];
+let choices = ["Judentum/Juden", "Islam/Muslime", "Christentum/Christen", "Blut", "Gift", "Krankheit", "Seuche", "Brunnen", "Tod von Jesus", "Verrat", "Rasse", "Geld", "Weltherrschaft", "Kapitalismus", "Kommunismus", "Zionismus", "Gier"];
 let exclude = []
 let unique  = []
 console.debug(choices)
@@ -74,7 +74,9 @@ let $terms     = document.querySelector('#mb-terms')
 let $toolbar   = document.querySelector('#mb-toolbar')
 let $start     = document.querySelector('#mb-btn-start')
 let $related   = document.querySelector('#mb-btn-related')
+$related.style.backgroundColor = '#bad8a4'; // Matte green color
 let $unrelated = document.querySelector('#mb-btn-unrelated')
+$unrelated.style.backgroundColor = '#e5a3a3'; // Matte red color
 let $continue  = document.querySelector('#NextButton')
 let $progress  = document.querySelector('#progress')
 
